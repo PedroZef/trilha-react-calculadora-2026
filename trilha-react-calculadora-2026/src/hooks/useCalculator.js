@@ -7,9 +7,12 @@ const OPERATOR_SYMBOLS = {
   '/': '÷',
 };
 
+const DIVISION_BY_ZERO_MESSAGE = 'Não é possível dividir por 0';
+const MAX_DISPLAY_LENGTH = 13;
+
 function formatMathResult(val) {
   if (!Number.isFinite(val)) {
-    return 'Não é possível dividir por 0';
+    return DIVISION_BY_ZERO_MESSAGE;
   }
   // Corrige imprecisões de ponto flutuante em JS (ex: 0.1 + 0.2)
   const rounded = parseFloat(Number(val.toFixed(10)).toString());
@@ -22,39 +25,48 @@ export function useCalculator() {
   const [operation, setOperation] = useState(null);
   const [equation, setEquation] = useState('');
   const [isWaitingNewValue, setIsWaitingNewValue] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   // Inserir dígito (0-9)
   const handleDigit = useCallback((digit) => {
+    if (hasError) {
+      setDisplayValue(digit);
+      setHasError(false);
+      setIsWaitingNewValue(false);
+      return;
+    }
+    if (isWaitingNewValue) {
+      setDisplayValue(digit);
+      setIsWaitingNewValue(false);
+      return;
+    }
     setDisplayValue((prev) => {
-      // Se tiver erro ou precisando de novo número, substitui
-      if (prev.includes('Não é possível') || prev.includes('Erro') || isWaitingNewValue) {
-        setIsWaitingNewValue(false);
-        return digit;
-      }
       if (prev === '0') {
         return digit;
       }
       // Limite de segurança de caracteres para não estourar o display
-      if (prev.length >= 13) {
+      if (prev.length >= MAX_DISPLAY_LENGTH) {
         return prev;
       }
       return prev + digit;
     });
-  }, [isWaitingNewValue]);
+  }, [hasError, isWaitingNewValue]);
 
   // Inserir ponto decimal (.)
   const handleDecimal = useCallback(() => {
-    setDisplayValue((prev) => {
-      if (prev.includes('Não é possível') || prev.includes('Erro') || isWaitingNewValue) {
-        setIsWaitingNewValue(false);
-        return '0.';
-      }
-      if (!prev.includes('.')) {
-        return prev + '.';
-      }
-      return prev;
-    });
-  }, [isWaitingNewValue]);
+    if (hasError) {
+      setDisplayValue('0.');
+      setHasError(false);
+      setIsWaitingNewValue(false);
+      return;
+    }
+    if (isWaitingNewValue) {
+      setDisplayValue('0.');
+      setIsWaitingNewValue(false);
+      return;
+    }
+    setDisplayValue((prev) => (prev.includes('.') ? prev : `${prev}.`));
+  }, [hasError, isWaitingNewValue]);
 
   // Limpar tudo (C)
   const handleClear = useCallback(() => {
@@ -63,20 +75,23 @@ export function useCalculator() {
     setOperation(null);
     setEquation('');
     setIsWaitingNewValue(false);
+    setHasError(false);
   }, []);
 
   // Apagar último dígito (Backspace)
   const handleDelete = useCallback(() => {
-    setDisplayValue((prev) => {
-      if (prev.includes('Não é possível') || prev.includes('Erro') || isWaitingNewValue) {
-        return '0';
-      }
-      if (prev.length <= 1) {
-        return '0';
-      }
-      return prev.slice(0, -1);
-    });
-  }, [isWaitingNewValue]);
+    if (hasError) {
+      setDisplayValue('0');
+      setHasError(false);
+      setIsWaitingNewValue(false);
+      return;
+    }
+    if (isWaitingNewValue) {
+      setDisplayValue('0');
+      return;
+    }
+    setDisplayValue((prev) => (prev.length <= 1 ? '0' : prev.slice(0, -1)));
+  }, [hasError, isWaitingNewValue]);
 
   // Função interna de cálculo entre dois números
   const compute = useCallback((num1, num2, op) => {
@@ -93,7 +108,7 @@ export function useCalculator() {
         return formatMathResult(a * b);
       case '/':
         if (b === 0) {
-          return 'Não é possível dividir por 0';
+          return DIVISION_BY_ZERO_MESSAGE;
         }
         return formatMathResult(a / b);
       default:
@@ -106,7 +121,7 @@ export function useCalculator() {
     const symbol = OPERATOR_SYMBOLS[nextOp] || nextOp;
 
     // Se estiver em estado de erro, reinicia
-    if (displayValue.includes('Não é possível') || displayValue.includes('Erro')) {
+    if (hasError) {
       return;
     }
 
@@ -123,6 +138,7 @@ export function useCalculator() {
       setPreviousValue(result);
       setDisplayValue(result);
       setEquation(`${result} ${symbol}`);
+      setHasError(result === DIVISION_BY_ZERO_MESSAGE);
     } else {
       setPreviousValue(displayValue);
       setEquation(`${displayValue} ${symbol}`);
@@ -130,11 +146,11 @@ export function useCalculator() {
 
     setOperation(nextOp);
     setIsWaitingNewValue(true);
-  }, [displayValue, operation, isWaitingNewValue, previousValue, compute]);
+  }, [displayValue, operation, isWaitingNewValue, previousValue, hasError, compute]);
 
   // Porcentagem (%)
   const handlePercentage = useCallback(() => {
-    if (displayValue.includes('Não é possível') || displayValue.includes('Erro')) {
+    if (hasError) {
       return;
     }
 
@@ -150,7 +166,7 @@ export function useCalculator() {
       // Ex: 50% => 0.5
       setDisplayValue(formatMathResult(current / 100));
     }
-  }, [displayValue, previousValue, operation]);
+  }, [displayValue, previousValue, operation, hasError]);
 
   // Executar resultado final (=)
   const handleEquals = useCallback(() => {
@@ -166,6 +182,7 @@ export function useCalculator() {
     setPreviousValue(null);
     setOperation(null);
     setIsWaitingNewValue(true);
+    setHasError(result === DIVISION_BY_ZERO_MESSAGE);
   }, [operation, previousValue, displayValue, compute]);
 
   // Listener para teclado físico
@@ -204,6 +221,7 @@ export function useCalculator() {
   return {
     displayValue,
     equation,
+    hasError,
     handleDigit,
     handleOperator,
     handleDecimal,

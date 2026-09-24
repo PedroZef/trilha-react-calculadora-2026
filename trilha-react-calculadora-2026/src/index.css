@@ -1,41 +1,44 @@
 :root {
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   --bg-dark: #080b11;
   --bg-gradient: radial-gradient(circle at 50% -10%, #172138 0%, #07090e 100%);
-  
-  /* Glassmorphism tokens */
+
+  /* Tokens de Glassmorphism (Efeito Vidro Fosco) */
   --glass-card: rgba(18, 24, 38, 0.72);
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-border-hover: rgba(255, 255, 255, 0.25);
   --glass-highlight: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(59, 130, 246, 0.15);
-  
-  /* Display tokens */
+  --glass-shadow:
+    0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(59, 130, 246, 0.15);
+
+  /* Tokens do Visor (Display OLED) */
   --display-bg: rgba(9, 13, 22, 0.9);
   --display-border: rgba(255, 255, 255, 0.08);
   --display-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
-  
-  /* Button colors */
+
+  /* Cores e estilos dos Botões */
   --btn-num-bg: rgba(255, 255, 255, 0.05);
   --btn-num-hover: rgba(255, 255, 255, 0.12);
   --btn-num-text: #f1f5f9;
-  
+
   --btn-op-bg: rgba(59, 130, 246, 0.16);
   --btn-op-hover: rgba(59, 130, 246, 0.28);
   --btn-op-border: rgba(59, 130, 246, 0.35);
   --btn-op-text: #60a5fa;
-  
+
   --btn-act-bg: rgba(244, 63, 94, 0.14);
   --btn-act-hover: rgba(244, 63, 94, 0.26);
   --btn-act-border: rgba(244, 63, 94, 0.3);
   --btn-act-text: #fb7185;
-  
+
   --btn-eq-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
   --btn-eq-hover-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   --btn-eq-shadow: 0 8px 24px rgba(59, 130, 246, 0.45);
   --btn-eq-text: #ffffff;
-  
-  /* Typography colors */
+
+  /* Cores de Tipografia */
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --text-equation: #7dd3fc;
@@ -65,10 +68,10 @@ body {
   position: relative;
 }
 
-/* Ambient glow atmospheric background effect */
+/* Efeito de iluminação atmosférica de fundo (Ambient Glow) */
 body::before,
 body::after {
-  content: '';
+  content: "";
   position: fixed;
   border-radius: 50%;
   pointer-events: none;
@@ -80,7 +83,11 @@ body::before {
   height: 480px;
   top: 15%;
   left: calc(50% - 320px);
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.22) 0%, rgba(59, 130, 246, 0) 70%);
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.22) 0%,
+    rgba(59, 130, 246, 0) 70%
+  );
   filter: blur(80px);
 }
 
@@ -89,7 +96,11 @@ body::after {
   height: 520px;
   bottom: 10%;
   right: calc(50% - 340px);
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.22) 0%, rgba(139, 92, 246, 0) 70%);
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.22) 0%,
+    rgba(139, 92, 246, 0) 70%
+  );
   filter: blur(90px);
 }
 
@@ -108,8 +119,25 @@ body::after {
 
 button {
   font-family: inherit;
-  outline: none;
   border: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Indicador de foco visível para navegação por teclado (WCAG 2.4.7) */
+button:focus-visible {
+  outline: 2px solid var(--text-equation);
+  outline-offset: 3px;
+}
+
+/* Respeita usuários com preferência por menos movimento (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

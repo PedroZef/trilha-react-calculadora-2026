@@ -1,0 +1,63 @@
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+}
+
+.calculatorCard {
+  width: 100%;
+  max-width: 390px;
+  background: var(--glass-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: var(--glass-shadow);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.calculatorCard:hover {
+  border-color: var(--glass-border-hover);
+}
+
+/* Reflexo sutil no topo do vidro */
+.calculatorCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.keypadGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 420px) {
+  .calculatorCard {
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+  .keypadGrid {
+    gap: 8px;
+  }
+}
