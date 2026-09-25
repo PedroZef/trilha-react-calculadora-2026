@@ -1,86 +1,86 @@
 .btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 58px;
-  border-radius: 16px;
-  font-size: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  position: relative;
-  overflow: hidden;
-  user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 58px;
+    border-radius: 16px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+    user-select: none;
 }
 
 .btn:active {
-  transform: scale(0.93);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transform: scale(0.93);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Variante Default: Números e Ponto */
 .default {
-  background-color: var(--btn-num-bg);
-  color: var(--btn-num-text);
-  border-color: rgba(255, 255, 255, 0.08);
+    background-color: var(--btn-num-bg);
+    color: var(--btn-num-text);
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 .default:hover {
-  background-color: var(--btn-num-hover);
-  border-color: rgba(255, 255, 255, 0.22);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    background-color: var(--btn-num-hover);
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
 }
 
 /* Variante Operator: +, -, *, / */
 .operator {
-  background-color: var(--btn-op-bg);
-  color: var(--btn-op-text);
-  border-color: var(--btn-op-border);
-  font-size: 24px;
+    background-color: var(--btn-op-bg);
+    color: var(--btn-op-text);
+    border-color: var(--btn-op-border);
+    font-size: 24px;
 }
 
 .operator:hover {
-  background-color: var(--btn-op-hover);
-  border-color: rgba(96, 165, 250, 0.6);
-  box-shadow: 0 0 16px rgba(59, 130, 246, 0.35);
+    background-color: var(--btn-op-hover);
+    border-color: rgba(96, 165, 250, 0.6);
+    box-shadow: 0 0 16px rgba(59, 130, 246, 0.35);
 }
 
 /* Variante Action: C, ⌫, % */
 .action {
-  background-color: var(--btn-act-bg);
-  color: var(--btn-act-text);
-  border-color: var(--btn-act-border);
-  font-size: 18px;
+    background-color: var(--btn-act-bg);
+    color: var(--btn-act-text);
+    border-color: var(--btn-act-border);
+    font-size: 18px;
 }
 
 .action:hover {
-  background-color: var(--btn-act-hover);
-  border-color: rgba(251, 113, 133, 0.55);
-  box-shadow: 0 0 14px rgba(244, 63, 94, 0.3);
+    background-color: var(--btn-act-hover);
+    border-color: rgba(251, 113, 133, 0.55);
+    box-shadow: 0 0 14px rgba(244, 63, 94, 0.3);
 }
 
 /* Variante Equals: = */
 .equals {
-  background: var(--btn-eq-gradient);
-  color: var(--btn-eq-text);
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: var(--btn-eq-shadow);
-  font-size: 26px;
-  font-weight: 700;
+    background: var(--btn-eq-gradient);
+    color: var(--btn-eq-text);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: var(--btn-eq-shadow);
+    font-size: 26px;
+    font-weight: 700;
 }
 
 .equals:hover {
-  background: var(--btn-eq-hover-gradient);
-  box-shadow: 0 8px 28px rgba(59, 130, 246, 0.6);
-  transform: translateY(-1px);
+    background: var(--btn-eq-hover-gradient);
+    box-shadow: 0 8px 28px rgba(59, 130, 246, 0.6);
+    transform: translateY(-1px);
 }
 
 .equals:active {
-  transform: scale(0.95);
+    transform: scale(0.95);
 }
 
 .spanTwo {
-  grid-column: span 2;
+    grid-column: span 2;
 }

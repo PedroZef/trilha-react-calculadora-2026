@@ -1,4 +1,4 @@
-import styles from "./Button.module.css";
+import styles from './Button.module.css';
 
 /**
  * Componente Button
@@ -10,29 +10,22 @@ import styles from "./Button.module.css";
  * @param {number} span - Número de colunas ocupadas no grid (padrão: 1, ou 2 para teclas largas como o 0).
  * @param {string} ariaLabel - Rótulo acessível para leitores de tela.
  */
-export const Button = ({
-  label,
-  onClick,
-  variant = "default",
-  span = 1,
-  ariaLabel,
-}) => {
-  // Seleciona a classe CSS correspondente à variante desejada
-  const variantClass = styles[variant] || styles.default;
+export const Button = ({ label, onClick, variant = 'default', span = 1, ariaLabel }) => {
+    // Seleciona a classe CSS correspondente à variante desejada
+    const variantClass = styles[variant] || styles.default;
 
-  // Aplica classe de expansão caso o botão ocupe 2 colunas
-  const spanClass = span === 2 ? styles.spanTwo : "";
+    // Aplica classe de expansão caso o botão ocupe 2 colunas
+    const spanClass = span === 2 ? styles.spanTwo : '';
 
-  return (
-    <button
-      type="button"
-      className={`${styles.btn} ${variantClass} ${spanClass}`}
-      onClick={onClick}
-      aria-label={ariaLabel || (typeof label === "string" ? label : undefined)}
-    >
-      {label}
-    </button>
-  );
+    return (
+        <button
+            type="button"
+            className={`${styles.btn} ${variantClass} ${spanClass}`}
+            onClick={onClick}
+            aria-label={ariaLabel || (typeof label === 'string' ? label : undefined)}>
+            {label}
+        </button>
+    );
 };
 
 export default Button;

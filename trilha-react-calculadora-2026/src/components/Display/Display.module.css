@@ -1,69 +1,69 @@
 .displayContainer {
-  width: 100%;
-  background: var(--display-bg);
-  border: 1px solid var(--display-border);
-  box-shadow: var(--display-shadow);
-  border-radius: 18px;
-  padding: 16px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-  min-height: 105px;
-  margin-bottom: 20px;
-  overflow: hidden;
-  position: relative;
-  transition:
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+    width: 100%;
+    background: var(--display-bg);
+    border: 1px solid var(--display-border);
+    box-shadow: var(--display-shadow);
+    border-radius: 18px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    min-height: 105px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .displayContainer:hover {
-  border-color: rgba(255, 255, 255, 0.16);
-  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.7);
 }
 
 .equationRow {
-  width: 100%;
-  min-height: 22px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-equation);
-  text-align: right;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  opacity: 0.95;
-  margin-bottom: 4px;
+    width: 100%;
+    min-height: 22px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-equation);
+    text-align: right;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.95;
+    margin-bottom: 4px;
 }
 
 .valueRow {
-  width: 100%;
-  font-size: 40px;
-  font-weight: 700;
-  color: var(--text-main);
-  text-align: right;
-  letter-spacing: -0.5px;
-  line-height: 1.15;
-  white-space: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
-  text-shadow: 0 0 16px rgba(255, 255, 255, 0.12);
+    width: 100%;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--text-main);
+    text-align: right;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    text-shadow: 0 0 16px rgba(255, 255, 255, 0.12);
 }
 
 .valueRow::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .valueSmall {
-  font-size: 26px;
+    font-size: 26px;
 }
 
 .errorState {
-  color: var(--btn-act-text);
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: 0;
-  text-shadow: 0 0 10px rgba(244, 63, 94, 0.3);
+    color: var(--btn-act-text);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-shadow: 0 0 10px rgba(244, 63, 94, 0.3);
 }
